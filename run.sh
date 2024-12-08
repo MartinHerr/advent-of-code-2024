@@ -1,0 +1,1 @@
+npx tsx day1/starTwo.ts
