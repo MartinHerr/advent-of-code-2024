@@ -1,38 +1,49 @@
 from parser import parse_input
 
-def place_antinode(a1, a2, size):
-    x = 2 * a2[0] - a1[0]
-    y = 2 * a2[1] - a1[1]
-    # print(f"a1: {a1}, a2: {a2}, an: {(x, y)}")
-    if 0 <= x < size[0] and 0 <= y < size[1]:
-        return (x, y)
-    else:
-        return None
+def build_memory(disk_map):
+    left_pointer = 0
+    right_pointer = len(disk_map) - 1
+    left_id = 0
+    right_id = len(disk_map) // 2
+    left_count = disk_map[left_pointer]
+    right_count = disk_map[right_pointer]
+    memory = []
+    digits_to_append = []
+    while left_pointer < right_pointer:
+        # Append left IDs
+        memory += [left_id for _ in range(left_count)]
+        # Append right IDs until there is no more free memory
+        left_pointer += 1
+        left_count = disk_map[left_pointer]
+        for i in range(left_count):
+            digits_to_append.append(right_id)
+            right_count -= 1
+            if right_count == 0:
+                right_pointer -= 2
+                right_count = disk_map[right_pointer]
+                right_id -= 1
+        memory += digits_to_append
+        digits_to_append = []
+        left_pointer += 1
+        left_count = disk_map[left_pointer]
+        left_id += 1
+    print(f"left pointer: {left_pointer}, left id: {left_id}, left count: {left_count}")
+    print(f"right pointer: {right_pointer}, right id: {right_id}, right count: {right_count}")
+    if left_pointer <= right_pointer:
+        memory += [right_id for _ in range(right_count)]
+    return memory
 
-def locate_antinodes(antennas, size):
-    count = 0
-    antinodes = {}
-    for antenna_type in antennas:
-        for i, a1 in enumerate(antennas[antenna_type]):
-            for j, a2 in enumerate(antennas[antenna_type]):
-                if j != i:
-                    antinode = place_antinode(a1, a2, size)
-                    if antinode is not None:
-                        (x, y) = antinode
-                        if x in antinodes:
-                            if y in antinodes[x]:
-                                pass
-                            else:
-                                antinodes[x].append(y)
-                                count += 1
-                        else:
-                            antinodes[x] = [y]
-                            count += 1
-    return count
+def checksum(memory):
+    result = 0
+    for i, block in enumerate(memory):
+        result += i * block
+    return result
 
 if __name__ == "__main__":
     with open("input.txt") as input:
-        antennas, size = parse_input(input)
-    # print(antennas)
-    # print(size)
-    print(locate_antinodes(antennas, size))
+        disk_map = parse_input(input)
+    print(disk_map)
+    memory = build_memory(disk_map)
+    print(memory[:100])
+    sum = checksum(memory)
+    print(sum)
