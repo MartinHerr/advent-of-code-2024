@@ -79,19 +79,11 @@ def blink_n_times(blink_count, first_stone):
         current_stone = first_stone
         while current_stone is not None:
             current_stone = current_stone.blink()
-        print_all_stones(first_stone)
-        # count_all_stones(first_stone)
 
 if __name__ == "__main__":
-    # with open("input.txt") as input:
-    #     numbers = parse_input(input)
-    # first_stone = build_stones_chained_list(numbers)
-    # print_all_stones(first_stone)
-    # blink_n_times(75, first_stone)
-    # count_all_stones(first_stone)
-    for i in range(10):
-        first_stone = build_stones_chained_list([i])
-        print(first_stone)
-        blink_n_times(5, first_stone)
-        print("===========")
-        # print_all_stones(first_stone)
+    with open("input.txt") as input:
+        numbers = parse_input(input)
+    first_stone = build_stones_chained_list(numbers)
+    print_all_stones(first_stone)
+    blink_n_times(25, first_stone)
+    count_all_stones(first_stone)
