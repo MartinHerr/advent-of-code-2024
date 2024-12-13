@@ -5,7 +5,7 @@ def populate_fences(map, horizontal_fences, vertical_fences):
     for y, line in enumerate(map):
         for x, _ in enumerate(line):
             if x < map_x - 1 and map[y][x] != map[y][x + 1]:
-                vertical_fences[y][ x + 1] = 1
+                vertical_fences[y][x + 1] = 1
             if y < map_y - 1 and map[y][x] != map[y + 1][x]:
                 horizontal_fences[y + 1][x] = 1
     return horizontal_fences, vertical_fences
