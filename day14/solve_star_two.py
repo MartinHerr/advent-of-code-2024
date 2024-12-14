@@ -66,52 +66,48 @@ def detect_tree_likelihood(robots, map_size):
     -------
     score: a metric that counts robots that are diagonally adjacent.
     """
-    map = [["." for x in range(map_size[0])] for y in range(map_size[1])]
-    visited = [[0 for char in line] for line in map]
-    for robot in robots:
-        pos = robot["pos"]
-        if map[pos[1]][pos[0]] == ".":
-            map[pos[1]][pos[0]] = 1
-        else:
-            map[pos[1]][pos[0]] += 1
-    for y in range(map_size[1]):
-        for x in range(map_size[0]):
-            map[y][x] = str(map[y][x])
     score = 0
-    for y in range(len(map)):
-        for x in range(len(map[y])):
-            score += count_alignments((x, y), map, visited)
+    set_of_robots_pos = set([(robot["pos"][0], robot["pos"][1]) for robot in robots])
+    sorted_robots_pos = sorted(list(set_of_robots_pos),
+                           key = lambda pos: 1000 * pos[1] + pos[0])
+    # print(sorted_robots_pos)
+    visited = {pos: False for pos in set_of_robots_pos}
+    # We only check for existing robots, no need to go through all the map
+    for i, robot_pos in enumerate(sorted_robots_pos):
+        score += count_alignments(robot_pos, set_of_robots_pos, visited, map_size)
     return score
 
-def left_branch_score(pos, map, visited):
+def left_branch_score(pos, set_of_robots_pos, visited, map_size):
     (x, y) = pos
-    visited[y][x] = 1
-    if map[y][x] == ".":
+    if pos not in set_of_robots_pos:
         return 0
-    elif y < len(map) - 1 and 0 < x:
-        return 1 + left_branch_score((x - 1, y + 1), map, visited)
+    else:
+        visited[pos] = True
+        if y < map_size[1] - 1 and 0 < x:
+            return 1 + left_branch_score((x - 1, y + 1), set_of_robots_pos, visited, map_size)
     return 1
 
-def right_branch_score(pos, map, visited):
+def right_branch_score(pos, set_of_robots_pos, visited, map_size):
     (x, y) = pos
-    visited[y][x] = 1
-    if map[y][x] == ".":
+    if pos not in set_of_robots_pos:
         return 0
-    elif y < len(map) - 1 and x < len(map[0]) - 1:
-                return 1 + right_branch_score((x + 1, y + 1), map, visited)
+    else:
+        visited[pos] = True
+        if y < map_size[1] - 1 and x < map_size[0] - 1:
+            return 1 + right_branch_score((x + 1, y + 1), set_of_robots_pos, visited, map_size)
     return 1
 
-def count_alignments(pos, map, visited):
-    (x, y) = pos
-    if not visited[y][x]:
-        if map[y][x] == ".":
+def count_alignments(robot_pos, set_of_robots_pos, visited, map_size):
+    (x, y) = robot_pos
+    if not visited[robot_pos]:
+        if robot_pos not in set_of_robots_pos:
             return 0
         else:
-            visited[y][x] = 1
+            visited[robot_pos] = True
             next_scores = 0
-            if y < len(map) - 1 and 0 < x < len(map[0]) - 1:
-                next_scores += left_branch_score((x - 1, y + 1), map, visited) +\
-                    right_branch_score((x + 1, y + 1), map, visited)
+            if y < map_size[1] - 1 and 0 < x < map_size[0] - 1:
+                next_scores += left_branch_score((x - 1, y + 1), set_of_robots_pos, visited, map_size) +\
+                    right_branch_score((x + 1, y + 1), set_of_robots_pos, visited, map_size)
             return next_scores 
     else:
         return 0
