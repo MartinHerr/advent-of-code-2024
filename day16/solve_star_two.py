@@ -1,6 +1,6 @@
 import heapq
 from collections import defaultdict
-from parser import parse_input
+from parser import parse_input, diff_output
 
 def dfs(came_from, current, visited):
     # print(f"Searching with DFS on nodes {came_from[current]}")
@@ -123,3 +123,8 @@ if __name__ == "__main__":
 
     print(f"\nShortest cost: {shortest_cost}")
     print(f"Number of shortest paths nodes: {len(visited_nodes)}")
+
+    with open("map_sur_input_martin.txt") as output:
+        print(len(map[0]), len(map))
+        diffs = diff_output(map, output)
+        print(diffs)
