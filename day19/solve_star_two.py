@@ -26,6 +26,4 @@ def count_arrangements(designs, towels):
 if __name__ == "__main__":
     with open("input.txt") as input:
         towels, designs = parse_input(input)
-        # print(towels)
-        # print(designs)
         print(count_arrangements(designs, towels))

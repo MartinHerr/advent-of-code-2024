@@ -28,6 +28,4 @@ def search_correct_updates(orderings, page_numbers):
 if __name__ == "__main__":
     with open("input.txt") as input:
         orderings, page_numbers = parse_input(input)
-    # for update in page_numbers:
-    #     print(update, is_correct_update(orderings, update), middle_number(update))
     print(search_correct_updates(orderings, page_numbers))

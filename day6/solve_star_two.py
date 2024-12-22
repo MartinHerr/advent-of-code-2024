@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from parser import parse_input, parse_reduced_input
+from parser import parse_reduced_input
 from copy import deepcopy
 
 def next_orientation(guard):
@@ -20,6 +20,9 @@ def walk_to_next_wall(
         walls_positions_by_x,
         walls_positions_by_y,
         map_size):
+    # In one step, we make the guard walk all the way to the next wall
+    # To do so, we search in the walls positions, sorted by x or y depending
+    # on the walk direction
     (x, y) = pos
     keep_walking = True
     if guard == ">":

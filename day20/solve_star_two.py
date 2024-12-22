@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 from parser import parse_input
-from dijkstra import dijkstra
 
 def manhattan(tile1, tile2):
     dx = abs(tile1[0] - tile2[0])

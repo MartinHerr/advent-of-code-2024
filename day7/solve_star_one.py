@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 from parser import parse_input
 
-# OPERATORS = ["+", "*"]
-
 def combine(num1, num2, operator):
     if operator == 0:
         return num1 + num2

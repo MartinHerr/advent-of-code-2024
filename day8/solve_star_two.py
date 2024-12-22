@@ -8,7 +8,6 @@ def find_antinodes(a1, a2, size):
     dy = a2[1] - a1[1]
     g = gcd(dx, dy)
     dir_vector = (dx // g, dy // g)
-    # print(f"a1: {a1}, a2: {a2}, an: {(x, y)}")
     antinode = a1
     while 0 <= antinode[0] < size[0] and 0 <= antinode[1] < size[1]:
         antinodes.append(antinode)
@@ -43,6 +42,4 @@ def locate_antinodes(antennas, size):
 if __name__ == "__main__":
     with open("input.txt") as input:
         antennas, size = parse_input(input)
-    # print(antennas)
-    # print(size)
     print(locate_antinodes(antennas, size))

@@ -52,11 +52,9 @@ def A_star_find_all_paths(start, goal, h, maze):
 
     while open_set:
         current_f, current = heapq.heappop(open_set)
-
         # Stop exploring if the current cost exceeds the shortest cost found
         if current_f > shortest_cost:
             break
-
         x, y, _ = current
         if (x, y) == goal:
             print("Detected goal!")
@@ -88,43 +86,6 @@ def A_star_find_all_paths(start, goal, h, maze):
 def h(node, goal, maze):
     """Heuristic function (Manhattan distance)."""
     return 0
-    # return abs(node[0] - goal[0]) + abs(node[1] - goal[1])
-
-# def h(node, goal, maze):
-#     # return min(abs(node[1] - goal[1]), abs(node[0] - goal[0]))
-#     # Heuristic estimating the cheapest path to the goal
-#     # CASE 1 : node and goal are aligned
-#     if node[2] == ">" and node[1] == goal[1]:
-#         if node[1] <= goal[1]:
-#             return abs(goal[0] - node[0]) + abs(goal[1] - node[1])
-#         else:
-#             return 2000 + abs(node[0] - goal[0]) + abs(goal[1] - node[1])
-#     if node[2] == "<" and node[1] == goal[1]:
-#         if node[1] >= goal[1]:
-#             return abs(goal[0] - node[0]) + abs(goal[1] - node[1])
-#         else:
-#             return 2000 + abs(node[0] - goal[0]) + abs(goal[1] - node[1])
-#     if node[2] == "v" and node[0] == goal[0]:
-#         if node[0] <= goal[0]:
-#             return abs(goal[0] - node[0]) + abs(goal[1] - node[1])
-#         else:
-#             return 2000 + abs(goal[0] - node[0]) + abs(node[1] - goal[1]) 
-#     if node[2] == "^" and node[0] == goal[0]:
-#         if node[0] >= goal[0]:
-#             return abs(goal[0] - node[0]) + abs(goal[1] - node[1])
-#         else:
-#             return 2000 + abs(goal[0] - node[0]) + abs(node[1] - goal[1])
-#     # CASE 2: node and goal not aligned, goal in "front" of node
-#     if node[2] == ">" and node[0] <= goal[0]:
-#         return 1000 + abs(goal[0] - node[0]) + abs(goal[1] - node[1])
-#     if node[2] == "<" and node[0] >= goal[0]:
-#         return 1000 + abs(goal[0] - node[0]) + abs(goal[1] - node[1])
-#     if node[2] == "v" and node[1] <= goal[1]:
-#         return 1000 + abs(goal[0] - node[0]) + abs(goal[1] - node[1])
-#     if node[2] == "^" and node[1] >= goal[1]:
-#         return 1000 + abs(goal[0] - node[0]) + abs(goal[1] - node[1])
-#     # CASE 3: node and goal not aligned, goal "behind" node
-#     return 2000 + abs(goal[0] - node[0]) + abs(goal[1] - node[1])
 
 def print_paths(paths, map):
     for path in paths:
@@ -138,10 +99,8 @@ def plot_map(map):
 if __name__ == "__main__":
     with open("input_ex.txt") as input:
         map, maze, start, goal = parse_input(input)
-
     # Run the modified A* algorithm
     paths, cost = A_star_find_all_paths(start, goal, h, maze)
-
     # Display results
     print(f"Shortest cost: {cost}")
     print(f"Number of shortest paths: {len(paths)}")

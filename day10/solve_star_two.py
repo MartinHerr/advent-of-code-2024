@@ -25,7 +25,6 @@ def walk_map(position: tuple[int],
                 local_score += walk_map((next_x, next_y), start_node, map, visited, map_size)
     else:
         local_score = 1
-    # visited[position[1]][position[0]] = local_score
     return local_score
 
 def walk_from_all_starts(start_positions, map, visited, map_size):

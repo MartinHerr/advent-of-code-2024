@@ -26,10 +26,9 @@ def walk_map(position: tuple[int],
             if map[next_y][next_x] == head + 1:
                 if visited[next_y][next_x] == ".":                
                     local_score += walk_map((next_x, next_y), start_node, map, visited, map_size)
-                # And add the result to local score
-        # visited[position[1]][position[0]] = local_score
     else:
         local_score = 1
+    # Add the result to the local score
     visited[position[1]][position[0]] = local_score
     # print(f"Head: {head}, position: {position}, score: {local_score}")
     return local_score

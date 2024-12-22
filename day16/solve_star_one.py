@@ -81,52 +81,30 @@ def next_free_tiles(node, maze):
     return count
 
 def h(node, goal, maze):
-    # return 0
     dx = abs(node[0] - goal[0])
     dy = abs(node[1] - goal[1])
     rotation_cost = 1000 if (node[2] == ">" and node[0] > goal[0]) or \
                            (node[2] == "<" and node[0] < goal[0]) or \
                            (node[2] == "^" and node[1] < goal[1]) or \
                            (node[2] == "v" and node[1] > goal[1]) else 0
-    # print(f"Heuristic {dx + dy + rotation_cost} on node {node}")
     return dx + dy + rotation_cost
 
-# def h(node, goal, maze):
-#     # return min(abs(node[1] - goal[1]), abs(node[0] - goal[0]))
-#     # Heuristic estimating the cheapest path to the goal
-#     # CASE 1 : node and goal are aligned
-#     if node[2] == ">" and node[1] == goal[1]:
-#         if node[1] <= goal[1]:
-#             return abs(goal[0] - node[0]) + abs(goal[1] - node[1])
-#         else:
-#             return 2000 + abs(node[0] - goal[0]) + abs(goal[1] - node[1])
-#     if node[2] == "<" and node[1] == goal[1]:
-#         if node[1] >= goal[1]:
-#             return abs(goal[0] - node[0]) + abs(goal[1] - node[1])
-#         else:
-#             return 2000 + abs(node[0] - goal[0]) + abs(goal[1] - node[1])
-#     if node[2] == "v" and node[0] == goal[0]:
-#         if node[0] <= goal[0]:
-#             return abs(goal[0] - node[0]) + abs(goal[1] - node[1])
-#         else:
-#             return 2000 + abs(goal[0] - node[0]) + abs(node[1] - goal[1]) 
-#     if node[2] == "^" and node[0] == goal[0]:
-#         if node[0] >= goal[0]:
-#             return abs(goal[0] - node[0]) + abs(goal[1] - node[1])
-#         else:
-#             return 2000 + abs(goal[0] - node[0]) + abs(node[1] - goal[1])
-#     # CASE 2: node and goal not aligned, goal in "front" of node
-#     if node[2] == ">" and node[0] <= goal[0]:
-#         return 1000 + abs(goal[0] - node[0]) + abs(goal[1] - node[1])
-#     if node[2] == "<" and node[0] >= goal[0]:
-#         return 1000 + abs(goal[0] - node[0]) + abs(goal[1] - node[1])
-#     if node[2] == "v" and node[1] <= goal[1]:
-#         return 1000 + abs(goal[0] - node[0]) + abs(goal[1] - node[1])
-#     if node[2] == "^" and node[1] >= goal[1]:
-#         return 1000 + abs(goal[0] - node[0]) + abs(goal[1] - node[1])
-#     # CASE 3: node and goal not aligned, goal "behind" node
-#     return 2000 + abs(goal[0] - node[0]) + abs(goal[1] - node[1])
-    
+def custom_h(node, goal, maze):
+    # Custom h function that gives a min distance heuristic, based on
+    # the min number of rotations required to reach the goal without any walls 
+    dx, dy = abs(goal[0] - node[0]), abs(goal[1] - node[1])
+    facing = node[2]
+    # Aligned case
+    if (facing == ">" and node[1] == goal[1]) or (facing == "<" and node[1] == goal[1]):
+        return dx + dy if node[0] <= goal[0] else 2000 + dx + dy
+    if (facing == "v" and node[0] == goal[0]) or (facing == "^" and node[0] == goal[0]):
+        return dx + dy if node[1] <= goal[1] else 2000 + dx + dy
+    # Goal in front of node
+    if (facing == ">" and node[0] <= goal[0]) or (facing == "<" and node[0] >= goal[0]) or \
+       (facing == "v" and node[1] <= goal[1]) or (facing == "^" and node[1] >= goal[1]):
+        return 1000 + dx + dy
+    # Goal behind node
+    return 2000 + dx + dy
 
 def A_star(start, goal, h, maze):
     came_from = {}
@@ -143,7 +121,6 @@ def A_star(start, goal, h, maze):
         for neighbor in neighbors(current, maze):
             tentative_g_score = g_score[current] + distance(current, neighbor)
             if tentative_g_score < g_score[neighbor]:
-                # print(f"Detected shortest distance {distance(current, neighbor)} between {current} and {neighbor}")
                 came_from[neighbor] = current
                 g_score[neighbor] = tentative_g_score
                 f_score[neighbor] = tentative_g_score + h(neighbor, goal, maze)

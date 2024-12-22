@@ -4,7 +4,6 @@ from parser import parse_input
 def place_antinode(a1, a2, size):
     x = 2 * a2[0] - a1[0]
     y = 2 * a2[1] - a1[1]
-    # print(f"a1: {a1}, a2: {a2}, an: {(x, y)}")
     if 0 <= x < size[0] and 0 <= y < size[1]:
         return (x, y)
     else:
@@ -34,6 +33,4 @@ def locate_antinodes(antennas, size):
 if __name__ == "__main__":
     with open("input.txt") as input:
         antennas, size = parse_input(input)
-    # print(antennas)
-    # print(size)
     print(locate_antinodes(antennas, size))

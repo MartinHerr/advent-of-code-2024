@@ -13,7 +13,6 @@ def populate_fences(map, horizontal_fences, vertical_fences):
 
 def dfs(start_pos, map, visited, horizontal_fences, vertical_fences):
     (x, y) = start_pos
-    # (map_y, map_x) = (len(map), len(map[0]))
     count = 1
     fences = 0
     visited[y][x] = 1
@@ -60,15 +59,6 @@ def measure_regions(map, visited, horizontal_fences, vertical_fences):
 if __name__ == "__main__":
     with open("input.txt") as input:
         map, visited, vertical_fences, horizontal_fences = parse_input(input)
-    # print(f"Map: ({len(map[0])}, {len(map)})")
-    # for line in map:
-    #     print(line)
-    # print(f"\nVertical fences: ({len(vertical_fences[0])}, {len(vertical_fences)})")
     populate_fences(map, horizontal_fences, vertical_fences)
-    # for line in vertical_fences:
-    #     print(line)
-    # print(f"\nHorizontal fences: ({len(horizontal_fences[0])}, {len(horizontal_fences)})")
-    # for line in horizontal_fences:
-    #     print(line)
     price = measure_regions(map, visited, horizontal_fences, vertical_fences)
     print(price)

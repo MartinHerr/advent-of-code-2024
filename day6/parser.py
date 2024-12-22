@@ -22,6 +22,8 @@ def parse_input(input):
     return schematic, guard_pos, guard
 
 def parse_reduced_input(input):
+    # We use 2 dictionnaries, to easily access the positions based on their
+    # x coordinate or their y coordinate
     positions_by_x = {}
     positions_by_y = {}
     for y, line in enumerate(input.readlines()):

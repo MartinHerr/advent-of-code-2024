@@ -34,13 +34,8 @@ def safety_factor(robots, map_size):
 if __name__ == "__main__":
     with open("input.txt") as input:
         robots = parse_input(input)
-    # for rob in robots:
-    #     print(rob)
-    # print("========")
     map_size = (101, 103)
     steps = 100
     robots = move_robots(robots, map_size, steps)
-    # for rob in robots:
-    #     print(rob)
     factor = safety_factor(robots, map_size)
     print(factor)
