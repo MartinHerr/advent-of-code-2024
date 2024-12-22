@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 def parse_input(input):
     for line in input.readlines():
         stones = [int(char) for char in line.strip("\n").split(" ")]

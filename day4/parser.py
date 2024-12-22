@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 def parse_input(input, word_length=4):
     grid = []
     extra_len = word_length - 1

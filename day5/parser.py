@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 def parse_input(input):
     orderings = {}
     page_numbers = []

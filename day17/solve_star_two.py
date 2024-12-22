@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from functools import cache
 
 def combo(operand, registers):

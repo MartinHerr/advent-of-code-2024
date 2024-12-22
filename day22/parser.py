@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 def parse_input(input):
     numbers = []
     for line in input.readlines():

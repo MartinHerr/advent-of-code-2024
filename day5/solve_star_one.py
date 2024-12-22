@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from parser import parse_input
 
 def is_correct_update(orderings, update):

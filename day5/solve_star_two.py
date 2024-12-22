@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from parser import parse_input
 
 with open("input.txt") as input:

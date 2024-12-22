@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 def move_robots(robots, map_size):
     for robot in robots:
         robot["pos"][0] += robot["velocity"][0]

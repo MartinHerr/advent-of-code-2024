@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from collections import defaultdict
 
 def parse_input(input, size=70, bytes=1024):

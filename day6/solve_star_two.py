@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from parser import parse_input, parse_reduced_input
 from copy import deepcopy
 

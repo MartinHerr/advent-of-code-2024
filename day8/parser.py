@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 def parse_input(input):
     antennas = {}
     for y, line in enumerate(input.readlines()):

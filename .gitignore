@@ -184,3 +184,6 @@ coverage.xml
 
 # Sphinx documentation
 docs/_build/
+
+# Remove AOC inputs to respect copyrights
+*.txt

@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 def parse_input(input):
     # Parse the schematic into a 2D array
     # We insert a crown of "0" around the array to simplify edge conditions

@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 def parse_input(input):
     reports = []
     for report in input.readlines():

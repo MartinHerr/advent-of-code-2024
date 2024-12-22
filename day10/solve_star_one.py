@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from parser import parse_input
 
 def find_valid_neighbors(position: tuple[int], map_size: tuple[int]):

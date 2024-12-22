@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from functools import cache
 
 with open("input.txt") as input:

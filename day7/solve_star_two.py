@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from parser import parse_input
 
 def combine(num1, num2, operator):

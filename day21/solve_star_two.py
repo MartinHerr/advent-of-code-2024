@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from dijkstra import dijkstra_numeric, dijkstra_direction
 from functools import cache
 

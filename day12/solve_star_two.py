@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from parser import parse_input
 
 def populate_fences(map, horizontal_fences, vertical_fences):

@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 def combo(operand, registers):
     # print(f"Calculation combo for operand {operand}")
     if operand in [i for i in range(4)]:

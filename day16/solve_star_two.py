@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import heapq
 from collections import defaultdict
 from parser import parse_input, diff_output
