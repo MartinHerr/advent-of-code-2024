@@ -14,6 +14,7 @@ def bron_kerbosch(graph, R, P, X, cliques):
     P: potential candidates for expansion
     X: already visited nodes to exclude
     cliques: list to collect maximal cliques
+    https://en.wikipedia.org/wiki/Bron%E2%80%93Kerbosch_algorithm
     """
     if not P and not X:
         cliques.append(R)
@@ -37,5 +38,7 @@ def find_largest_clique(graph):
 if __name__ == "__main__":
     with open("input.txt") as input:
         graph = parse_input(input)
+    # for i, key in enumerate(graph):
+    #     print(f"{i} - {key}: {graph[key]}")
     largest_clique = find_largest_clique(graph)
     print(",".join(sorted(largest_clique)))
